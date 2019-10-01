@@ -1,0 +1,23 @@
+#+OPTIONS: toc:nil
+
+* RestaurantReview Notes
+** Installation
+npx react-native init AwesomeProject
+** Run Program
+~cd AwesomeProject && xed -b ios~
+You can also open ~xcode~ and run the project (i.e., play button).  This will automatically start metro.
+** Exit Program
+Stop (i.e., stop button) ~xcode~ appears to be the best approach.  This shuts down the metro processes automatically.  Don't kill the metro process before stopping ~xcode~.  If you do then see Item 2 in *Problems*
+** Adding 3rd Party libraries
+When you add a 3rd Party library to your package (e.g., react-native-vector-icons).  Do the following:
+1. ~npm install --save name_of_library~
+2. ~react-native link~
+
+The second step is necessary in order to link the library to the underlying native iOS and Android apps.  You can run ~git status~ to see if the iOS and Android project folders have changed. When in doubt, check the npm package page *(e.g., https://www.npmjs.com/package/react-native-vector-icons)
+** Problems
+1. If you accidently shutdown metro before stopping xcode. Then run: ~ps aux | grep node~ then ~kill -9 xx~ where ~xx~ are the processes related to react-native.
+2. If unable to resolve a module, and you're sure the module exists:
+- Clear watchman watches: watchman watch-del-all
+- Delete node_modules: rm -rf node_modules and run yarn install
+- Reset Metro's cache: yarn start --reset-cache
+- Remove the cache: rm -rf /tmp/metro-*

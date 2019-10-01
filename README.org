@@ -1,0 +1,5 @@
+#+OPTIONS: toc:nil
+
+* Restaurant Review
+My implementation of Restaurant Review from [[https://egghead.io/courses/build-a-react-native-application-for-ios-and-android-from-start-to-finish][Build a React Native Application for iOS and Android from Start to Finish]].
+Instead of using Class-Components in React (the tutorial's approach), I'm using Functional Components along with React Hooks.
