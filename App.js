@@ -8,6 +8,7 @@
 
 import React, {useState, useEffect} from 'react';
 import {
+  Image,
   StyleSheet,
   View,
   SafeAreaView,
@@ -18,15 +19,13 @@ import axios from 'axios';
 
 import Header from 'components/Header';
 import RestaurantRow from 'components/RestaurantRow';
+import PizzaImage from 'images/pizza.png';
 
 const App: () => React$Node = () => {
   const [search, setSearch] = useState('');
   const [restaurants, setRestaurants] = useState([]);
 
   useEffect(() => {
-    /* fetch('http://localhost:3000/restaurants')
-     *   .then(response => response.json())
-     *   .then(result => setRestaurants(result)); */
     axios('http://localhost:3000/restaurants').then(result =>
       setRestaurants(result.data),
     );
@@ -34,6 +33,13 @@ const App: () => React$Node = () => {
 
   return (
     <SafeAreaView>
+      <View
+        style={{
+          marginTop: 40,
+          alignItems: 'center',
+        }}>
+        <Image source={PizzaImage} />
+      </View>
       <View>
         <Header />
 

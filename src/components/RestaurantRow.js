@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-import {View, Text, StyleSheet, TouchableHighlight} from 'react-native';
+import {View, Text, StyleSheet, TouchableHighlight, Image} from 'react-native';
 
 import Stars from 'components/Stars';
 
@@ -31,8 +31,15 @@ const RestaurantRow = ({place, index}) => {
         </View>
       </View>
       {showInfo && (
-        <View>
-          <Text style={styles.info}>Restaurant Info</Text>
+        <View style={styles.info}>
+          <Text>Restaurant Info</Text>
+          <Image
+            source={{
+              uri: `http://localhost:3000/images/${place.image}`,
+            }}
+            style={{flex: 1, height: 100}}
+            resizeMode="contain"
+          />
         </View>
       )}
     </View>

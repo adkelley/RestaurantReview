@@ -155,7 +155,7 @@ app.get('/restaurants', (req, res) => {
 });
 
 app.get('/images/:image', (req, res) => {
-  res.sendFile(__dirname + '/shapes' + req.params.image);
+  res.sendFile(__dirname + '/shapes/' + req.params.image);
 });
 
 app.post('/review', (req, res) => {
