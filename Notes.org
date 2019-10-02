@@ -1,11 +1,14 @@
 #+OPTIONS: toc:nil
 
-* RestaurantReview Notes
+* Setup, Installation, etc.
 ** Installation
 npx react-native init AwesomeProject
 ** Run Program
-~cd AwesomeProject && xed -b ios~
-You can also open ~xcode~ and run the project (i.e., play button).  This will automatically start metro.
+This is the best approach.
+- ~npm run ios~ which translates to ~react-native run-ios --simulator="iPhone 8"~
+Here's an alternate approach, that opens ~xode~, allowing you to test on different iPhones:
+- ~cd AwesomeProject && npm start~
+- open new terminal tab and run ~xed -b ios~
 ** Exit Program
 Stop (i.e., stop button) ~xcode~ appears to be the best approach.  This shuts down the metro processes automatically.  Don't kill the metro process before stopping ~xcode~.  If you do then see Item 2 in *Problems*
 ** Adding 3rd Party libraries
@@ -14,10 +17,40 @@ When you add a 3rd Party library to your package (e.g., react-native-vector-icon
 2. ~react-native link~
 
 The second step is necessary in order to link the library to the underlying native iOS and Android apps.  You can run ~git status~ to see if the iOS and Android project folders have changed. When in doubt, check the npm package page *(e.g., https://www.npmjs.com/package/react-native-vector-icons)
+** Upgrading to new react-native
+- ~react-native upgrade --legacy true~.  Note you can also use this to restore the ~ios~ and ~android~ folders.
+- You'll need to clean the build and clear the cache as well ~watchman watch-del-all && rm -rf $TMPDIR/react-* && rm -rf node_modules/ && npm cache verify && npm install && npm start -- --reset-cache~
+** Resources
+- [[https://cocoapods.org/][cocopods.org]]
 ** Problems
 1. If you accidently shutdown metro before stopping xcode. Then run: ~ps aux | grep node~ then ~kill -9 xx~ where ~xx~ are the processes related to react-native.
 2. If unable to resolve a module, and you're sure the module exists:
 - Clear watchman watches: watchman watch-del-all
 - Delete node_modules: rm -rf node_modules and run yarn install
-- Reset Metro's cache: yarn start --reset-cache
+- Reset Metro's cache: npm start -- --reset-cache
 - Remove the cache: rm -rf /tmp/metro-*
+3. If the xcode project doesn't build
+- If you're missing files ~*.h~ etc. then make sure that the pods have been installed. ~cd ios && pod install~
+* Tutorials
+** tut10
+Imports using absolute paths
+- add a ~package.json~ file to your src folders and add the name the folder.
+- for example, in your components folder, in the ~package.json~ file, add the line ~{"name": "components"}~
+** tut16
+This is a nice pattern. It allocates an array whose size is the number of rating stars.  Then, we map through the array, rendering a star when the array index is less than the floor(rating).  When the index is greater, then render a half star.
+
+#+BEGIN_SRC javascript
+const Stars = ({rating}) => {
+  const stars = [...Array(Math.ceil(rating))];
+  const fullStars = Math.floor(rating);
+  return (
+    <View style={{flexDirection: 'row'}}>
+      {stars.map((_, i) => {
+        const name = fullStars > i ? 'star' : 'star-half';
+        return <Icon key={i} name={name} color="#FFD64C" />;
+      })}
+    </View>
+  );
+};
+
+#+END_SRC
