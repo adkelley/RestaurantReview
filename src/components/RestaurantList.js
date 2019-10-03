@@ -1,11 +1,3 @@
-/**
- * Restaurant Review
- * https://egghead.io/courses/build-a-react-native-application-for-ios-and-android-from-start-to-finish
- *
- * @format
- * @flow
- */
-
 import React, {useState, useEffect} from 'react';
 import {
   Image,
@@ -20,11 +12,8 @@ import axios from 'axios';
 import Header from 'components/Header';
 import RestaurantRow from 'components/RestaurantRow';
 import PizzaImage from 'images/pizza.png';
-/* import Icon from 'react-native-vector-icons/FontAwesome';
- *
- * Icon.loadfont();
- *  */
-const App: () => React$Node = () => {
+
+const RestaurantList = () => {
   const [search, setSearch] = useState('');
   const [restaurants, setRestaurants] = useState([]);
 
@@ -83,4 +72,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default RestaurantList;
