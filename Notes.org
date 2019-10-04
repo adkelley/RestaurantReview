@@ -9,8 +9,10 @@ This is the best approach.
 Here's an alternate approach, that opens ~xode~, allowing you to test on different iPhones:
 - ~cd AwesomeProject && npm start~
 - open new terminal tab and run ~xed -b ios~
+- pick your favorit iPhone and press the ~play~ button in xCode.
 ** Exit Program
-Stop (i.e., stop button) ~xcode~ appears to be the best approach.  This shuts down the metro processes automatically.  Don't kill the metro process before stopping ~xcode~.  If you do then see Item 2 in *Problems*
+- ~Ctrl-c~ in metro transport terminal window.
+- Or, when using ~xcode~ app, press the stop button.  This shuts down the metro processes automatically.  Don't kill the metro process before stopping ~xcode~.  If you do then see Item 2 in *Problems*
 ** 3rd party packages
 When you add a 3rd Party library to your package (e.g., react-native-vector-icons).  Do the following:
 - ~npm install --save name_of_library~
