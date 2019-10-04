@@ -8,7 +8,7 @@ const RestaurantRow = ({place, index, navigation}) => {
   const [showInfo, setInfo] = useState(false);
 
   const infoPressed = () => {
-    navigation.navigate('Info');
+    navigation.navigate('Info', {place: place});
   };
 
   return (

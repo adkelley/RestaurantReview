@@ -24,7 +24,7 @@ import RestaurantList from 'components/RestaurantList';
 import RestaurantInfo from 'components/RestaurantInfo';
 
 /* This seems to be the only way to ensure that the navigation header
- * doesn't appear on the home screen launching the app
+ * doesn't appear on the home screen upon launching the app
  */
 RestaurantList.navigationOptions = {header: null};
 
