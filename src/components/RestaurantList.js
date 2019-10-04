@@ -13,7 +13,7 @@ import Header from 'components/Header';
 import RestaurantRow from 'components/RestaurantRow';
 import PizzaImage from 'images/pizza.png';
 
-const RestaurantList = () => {
+const RestaurantList = ({navigation}) => {
   const [search, setSearch] = useState('');
   const [restaurants, setRestaurants] = useState([]);
 
@@ -49,7 +49,7 @@ const RestaurantList = () => {
             );
           })}
           renderItem={({item, index}) => (
-            <RestaurantRow place={item} index={index} />
+            <RestaurantRow place={item} index={index} navigation={navigation} />
           )}
           keyExtractor={item => item.name}
           initialNumToRender={16}

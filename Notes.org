@@ -11,14 +11,18 @@ Here's an alternate approach, that opens ~xode~, allowing you to test on differe
 - open new terminal tab and run ~xed -b ios~
 ** Exit Program
 Stop (i.e., stop button) ~xcode~ appears to be the best approach.  This shuts down the metro processes automatically.  Don't kill the metro process before stopping ~xcode~.  If you do then see Item 2 in *Problems*
+** 3rd party packages
 When you add a 3rd Party library to your package (e.g., react-native-vector-icons).  Do the following:
-1. ~npm install --save name_of_library~
-2. ~react-native link~
+- ~npm install --save name_of_library~
+Note that automatic linking is supported starting in ~React Native 0.60~ and higher, so no need for ~react-native link~ anymore.
+if its a native module, you'll need the extra step for ios:
+- cd ios
+- pod install
 
-The second step is necessary in order to link the library to the underlying native iOS and Android apps.  You can run ~git status~ to see if the iOS and Android project folders have changed. When in doubt, check the npm package page *(e.g., https://www.npmjs.com/package/react-native-vector-icons)
+You can run ~git status~ to see if the iOS and Android project folders have changed. When in doubt, check the npm package page *(e.g., https://www.npmjs.com/package/react-native-vector-icons)
 ** Upgrading to new react-native
 - ~react-native upgrade --legacy true~.  Note you can also use this to restore the ~ios~ and ~android~ folders.
-- You'll need to clean the build and clear the cache as well ~watchman watch-del-all && rm -rf $TMPDIR/react-* && rm -rf node_modules/ && npm cache verify && npm install && npm start -- --reset-cache~
+To clean a build and clear the cache as well ~watchman watch-del-all && rm -rf $TMPDIR/react-* && rm -rf node_modules/ && npm cache verify && npm install && npm start -- --reset-cache~
 ** Resources
 - [[https://cocoapods.org/][cocopods.org]]
 ** Problems
@@ -56,3 +60,6 @@ const Stars = ({rating}) => {
 #+END_SRC
 
 I kept getting "Unrecognized font family 'FontAwesome" in the simulator.  Apparently this has to do with react-native-vectors [[https://github.com/oblador/react-native-vector-icons/issues/1041][not support autolinking]] yet.  Fortunately, there is a manual [[https://stackoverflow.com/questions/56985307/react-native-vector-icon-not-working-on-current-version-0-60][solution]] on stackoverflow.  Also, look [[https://github.com/oblador/react-native-vector-icons/issues/1035][here]] for further detail.
+** tut17
+Major changes to the code due to recent verions of react native and react navigation.  See [[https://reactnavigation.org/docs/en/getting-started.html][react navigation getting started]] to learn what modules need to be installed.
+Also, look at [[https://reactnavigation.org/docs/en/hello-react-navigation.html][Hello React Navigation]].
