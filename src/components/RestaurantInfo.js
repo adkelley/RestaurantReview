@@ -1,6 +1,13 @@
 import React from 'react';
 
-import {View, Text, ScrollView, Image, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  ScrollView,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
 
 import Stars from 'components/Stars';
 
@@ -10,6 +17,10 @@ const RestaurantInfo = ({navigation}) => {
   };
 
   const place = navigation.getParam('place', null);
+
+  const addReview = () => {
+    navigation.navigate('AddReview');
+  };
 
   return (
     <ScrollView style={styles.root}>
@@ -25,6 +36,9 @@ const RestaurantInfo = ({navigation}) => {
           <Text style={styles.name}>{place.name}</Text>
           <Text style={styles.address}>{place.address}</Text>
           <Stars rating={place.rating} />
+          <TouchableOpacity style={styles.button} onPress={addReview}>
+            <Text style={styles.buttonText}>Add Review</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </ScrollView>
@@ -53,6 +67,20 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     margin: 20,
+  },
+  button: {
+    borderWidth: 1,
+    borderColor: '#0066cc',
+    borderRadius: 14,
+    paddingHorizontal: 10,
+    paddingVertical: 3,
+    backgroundColor: '#fff',
+    marginTop: 10,
+  },
+  buttonText: {
+    color: '#0066CC',
+    fontSize: 12,
+    textAlign: 'center',
   },
 });
 

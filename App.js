@@ -25,6 +25,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import RestaurantList from 'components/RestaurantList';
 import RestaurantInfo from 'components/RestaurantInfo';
 import About from 'components/About';
+import AddReview from 'components/AddReview';
 
 /* This seems to be the only way to ensure that the navigation header
  * doesn't appear on the home screen upon launching the app
@@ -74,4 +75,18 @@ const Tabs = createBottomTabNavigator(
   },
 );
 
-export default createAppContainer(Tabs);
+const Modal = createStackNavigator(
+  {
+    Tabs: {screen: Tabs},
+    AddReview: {screen: AddReview},
+  },
+  {
+    mode: 'modal',
+    headerMode: 'none',
+    navigationOptions: {
+      gesturesEnabled: 'false',
+    },
+  },
+);
+
+export default createAppContainer(Modal);

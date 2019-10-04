@@ -75,6 +75,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#0066CC',
     fontSize: 12,
+    textAlign: 'center',
   },
   info: {
     marginHorizontal: 40,
