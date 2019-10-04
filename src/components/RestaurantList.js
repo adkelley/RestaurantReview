@@ -17,6 +17,8 @@ const RestaurantList = ({navigation}) => {
   const [search, setSearch] = useState('');
   const [restaurants, setRestaurants] = useState([]);
 
+  RestaurantList.navigationOptions = {header: null};
+
   useEffect(() => {
     axios('http://localhost:3000/restaurants').then(result =>
       setRestaurants(result.data),

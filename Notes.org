@@ -63,3 +63,12 @@ I kept getting "Unrecognized font family 'FontAwesome" in the simulator.  Appare
 ** tut17
 Major changes to the code due to recent verions of react native and react navigation.  See [[https://reactnavigation.org/docs/en/getting-started.html][react navigation getting started]] to learn what modules need to be installed.
 Also, look at [[https://reactnavigation.org/docs/en/hello-react-navigation.html][Hello React Navigation]].
+
+
+Note [[https://reactnavigation.org/docs/en/headers.html][React Navigation]] assumes you're using Class Components; for example using ~stattic navigationOtpions~ to set the title, styles, of the header bar.  The solution here, avoiding the requirement for Class Components is to use assign the ~navigationOptions~ property to the function:
+
+#+BEGIN_SRC javascript
+  RestaurantList.navigationOptions = {header: null};
+#+END_SRC
+
+JavaScript treats functions as first-class objects, so being an object, you can assign properties to a function.  See [[https://stackoverflow.com/questions/1535631/static-variables-in-javascript/45863870][stack overflow]] for more information on static variables in JavaScript.
