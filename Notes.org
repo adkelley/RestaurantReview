@@ -74,3 +74,5 @@ Note [[https://reactnavigation.org/docs/en/headers.html][React Navigation]] assu
 #+END_SRC
 
 JavaScript treats functions as first-class objects, so being an object, you can assign properties to a function.  See [[https://stackoverflow.com/questions/1535631/static-variables-in-javascript/45863870][stack overflow]] for more information on static variables in JavaScript.
+** tut20
+~react-navigation~ has changed a lot since this video, so be sure to add the module ~react-navigation-tabs~, and ~import {createBottomTabNavigator} from 'react-navigation-tabs'~
