@@ -23,6 +23,11 @@ import {createStackNavigator} from 'react-navigation-stack';
 import RestaurantList from 'components/RestaurantList';
 import RestaurantInfo from 'components/RestaurantInfo';
 
+/* This seems to be the only way to ensure that the navigation header
+ * doesn't appear on the home screen launching the app
+ */
+RestaurantList.navigationOptions = {header: null};
+
 const AppNavigator = createStackNavigator(
   {
     Home: {screen: RestaurantList},

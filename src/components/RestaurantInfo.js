@@ -3,7 +3,9 @@ import React from 'react';
 import {View, Text} from 'react-native';
 
 const RestaurantInfo = () => {
-  RestaurantInfo.navigationOptions = {title: 'Restaurant Info'};
+  RestaurantInfo.navigationOptions = {
+    title: 'Restaurant Info',
+  };
   return (
     <View>
       <Text>Info</Text>

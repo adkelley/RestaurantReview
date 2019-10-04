@@ -26,7 +26,11 @@ const RestaurantList = ({navigation}) => {
   });
 
   return (
-    <SafeAreaView>
+    <SafeAreaView
+      style={{
+        flex: 1,
+        backgroundColor: '#FFFFFF',
+      }}>
       <View
         style={{
           marginTop: 40,

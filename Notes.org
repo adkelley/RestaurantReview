@@ -18,8 +18,8 @@ When you add a 3rd Party library to your package (e.g., react-native-vector-icon
 - ~npm install --save name_of_library~
 Note that automatic linking is supported starting in ~React Native 0.60~ and higher, so no need for ~react-native link~ anymore.
 if its a native module, you'll need the extra step for ios:
-- cd ios
-- pod install
+- ~cd ios~
+- ~pod install~
 
 You can run ~git status~ to see if the iOS and Android project folders have changed. When in doubt, check the npm package page *(e.g., https://www.npmjs.com/package/react-native-vector-icons)
 ** Upgrading to new react-native
