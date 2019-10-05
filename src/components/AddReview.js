@@ -7,10 +7,11 @@ import {
   StyleSheet,
   TouchableOpacity,
   ActivityIndicator,
-  AsyncStorage,
+  YellowBox,
 } from 'react-native';
 
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import AsyncStorage from '@react-native-community/async-storage';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const AddReview = ({navigation}) => {
@@ -18,26 +19,44 @@ const AddReview = ({navigation}) => {
   const [review, setReview] = useState(defaultReview);
 
   useEffect(() => {
-    AsyncStorage.getItem('reviewer_name').then(name => {
-      if (name !== null && name !== undefined) {
-        setReview({...review, ['name']: name});
-      }
-    });
+    getReviewerName();
     return () => {
       setReview({...review, ['submitting']: false});
     };
   }, []);
 
+  // @Todo remove this when fixed in RN
+  YellowBox.ignoreWarnings([
+    'RCTRootView cancelTouches', // https://github.com/kmagiera/react-native-gesture-handler/issues/746
+  ]);
+
   const close = () => navigation.goBack();
+
+  const getReviewerName = async () => {
+    try {
+      const name = await AsyncStorage.getItem('reviewer_name');
+      if (name !== null && name !== undefined) {
+        setReview({...review, ['name']: name});
+      }
+    } catch (e) {
+      console.log(`read error: ${e}`);
+    }
+  };
+
+  const setReviewerName = async () => {
+    try {
+      if (review.name !== null && review.name !== undefined) {
+        const name = await AsyncStorage.setItem('reviewer_name', review.name);
+      }
+    } catch (e) {
+      console.log(`read error: ${e}`);
+    }
+  };
 
   const submitReview = () => {
     setReview({...review, ['submitting']: true});
 
-    if (review.name !== null && review.name !== undefined) {
-      AsyncStorage.setItem('reviewer_name', review.name);
-    }
-    // To remove from async storage
-    // AsyncStorage.removeItem("reviewer_name")
+    setReviewerName(); // This can't be placed in useEffect cleanup?
 
     fetch('http://localhost:3000/review', {
       method: 'POST',
