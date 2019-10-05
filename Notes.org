@@ -78,3 +78,15 @@ JavaScript treats functions as first-class objects, so being an object, you can 
 ~react-navigation~ has changed a lot since this video, so be sure to add the module ~react-navigation-tabs~, and ~import {createBottomTabNavigator} from 'react-navigation-tabs'~
 ** tut22
 Getting a deprecation warning ~-[RCTRootView cancelTouches]` is deprecated and will be deleted soon~.  This appears to have been filed as a [[https://github.com/facebook/react-native/issues/26707][bug]].
+** tut23
+Here's a good use of ~useEffect~:
+
+#+BEGIN_SRC javascript
+  useEffect(() => {
+    return () => {
+      setReview({...review, ['submitting']: false});
+    };
+  }, []);
+#+END_SRC
+
+During submittion, the submit button is disabled so that the user doesn't press more than one.  When the component unmounts, this cleanup function is run to ensure that the submit button will be enabled once again.  Probably not necessary given that the ~review~ object is set to its defaults each time the ~AddReview~ component is mounted. But it helped me to better understand ~useEffect~, and I don't need to ~setReview({...review, ['submitting']: false});~ during the ~fetch~.

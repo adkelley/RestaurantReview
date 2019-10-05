@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 import {
   View,
@@ -6,16 +6,42 @@ import {
   TextInput,
   StyleSheet,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const AddReview = ({navigation}) => {
-  const defaultReview = {name: '', rating: 0, comment: ''};
+  const defaultReview = {name: '', rating: 0, comment: '', submtting: false};
   const [review, setReview] = useState(defaultReview);
 
+  useEffect(() => {
+    return () => {
+      setReview({...review, ['submitting']: false});
+    };
+  }, []);
+
   const close = () => navigation.goBack();
+
+  const submitReview = () => {
+    setReview({...review, ['submitting']: true});
+    fetch('http://localhost:3000/review', {
+      method: 'POST',
+      body: JSON.stringify({
+        name: review.name,
+        rating: review.rating,
+        comment: review.comment,
+      }),
+    })
+      .then(response => response.json())
+      .then(result => {
+        navigation.goBack();
+      })
+      .catch(error => {
+        console.log(`error in submitting: ${error}`);
+      });
+  };
 
   return (
     <KeyboardAwareScrollView style={{flex: 1, backgroundColor: '#FFF'}}>
@@ -57,7 +83,18 @@ const AddReview = ({navigation}) => {
           numberOfLines={5}
         />
 
-        <TouchableOpacity style={styles.submitButton}>
+        {review.submitting && (
+          <ActivityIndicator
+            size="large"
+            color="#0066CC"
+            style={{padding: 10}}
+          />
+        )}
+
+        <TouchableOpacity
+          style={styles.submitButton}
+          onPress={submitReview}
+          disabled={review.submitting}>
           <Text style={styles.submitButtonText}>Submit Review</Text>
         </TouchableOpacity>
       </View>
