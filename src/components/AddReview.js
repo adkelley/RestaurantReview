@@ -7,6 +7,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   ActivityIndicator,
+  AsyncStorage,
 } from 'react-native';
 
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
@@ -17,6 +18,11 @@ const AddReview = ({navigation}) => {
   const [review, setReview] = useState(defaultReview);
 
   useEffect(() => {
+    AsyncStorage.getItem('reviewer_name').then(name => {
+      if (name !== null && name !== undefined) {
+        setReview({...review, ['name']: name});
+      }
+    });
     return () => {
       setReview({...review, ['submitting']: false});
     };
@@ -26,6 +32,13 @@ const AddReview = ({navigation}) => {
 
   const submitReview = () => {
     setReview({...review, ['submitting']: true});
+
+    if (review.name !== null && review.name !== undefined) {
+      AsyncStorage.setItem('reviewer_name', review.name);
+    }
+    // To remove from async storage
+    // AsyncStorage.removeItem("reviewer_name")
+
     fetch('http://localhost:3000/review', {
       method: 'POST',
       body: JSON.stringify({
