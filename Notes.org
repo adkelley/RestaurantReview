@@ -103,3 +103,8 @@ During submittion, the submit button is disabled so that the user doesn't press 
 !! You have to put this code in the Component where the warning is raised.
 
 -- Sad that ~setReviewerName();~ can't be put in the cleanup function in ~useEffect~ because, by the time the Component is dismounting, the ~review~ object is reset to the default state? I need to look into this further.
+** tut25
+I could not get this to work, because in xcode I don't have a ~launch source image~ dropdown.  Is this something Apple has done away with in xcode 11?  I'm still investigating.
+** tut26
+Skipping Android for now
+** tut27
