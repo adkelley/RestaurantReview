@@ -108,3 +108,6 @@ I could not get this to work, because in xcode I don't have a ~launch source ima
 ** tut26
 Skipping Android for now
 ** tut27
+Worked like a charm.  Note the app and launch screen icons are coming from [[https://ionicons.com][Ionicons]]
+** tut28
+Skipping Android for now
